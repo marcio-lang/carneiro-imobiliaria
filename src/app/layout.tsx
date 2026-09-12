@@ -30,28 +30,50 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Carneiro Inteligência Imobiliária | Compra, Venda e Avaliação de Imóveis",
+  title: "Carneiro Inteligência Imobiliária | Compra, Venda e Avaliação de Imóveis DF",
   description:
-    "Especialista em compra, venda e avaliação de imóveis. Atendimento personalizado, inteligência de mercado e as melhores oportunidades para você.",
+    "Especialista em compra, venda e avaliação de imóveis em Brasília e região. Atendimento consultivo, inteligência de mercado e assessoria com CRECI-DF 34325.",
   keywords: [
-    "corretor de imóveis",
-    "imobiliária",
-    "compra de imóveis",
-    "venda de imóveis",
-    "avaliação imobiliária",
-    "investimento imobiliário",
-    "imóveis de alto padrão",
+    "corretor de imóveis DF",
+    "imobiliária Brasília",
+    "imobiliária Samambaia",
+    "apartamento Samambaia DF",
+    "imóveis em Brasília",
+    "compra de imóveis DF",
+    "venda de imóveis DF",
+    "avaliação imobiliária DF",
+    "investimento imobiliário Brasília",
+    "imóveis de alto padrão Brasília",
     "Carneiro Inteligência Imobiliária",
-    "CRECI SP",
-    "imóveis de luxo São Paulo"
+    "Carneiro Corretor de Imóveis DF",
+    "Genilton Carneiro",
+    "CRECI 34325",
+    "CRECI-DF 34325"
   ],
   authors: [{ name: "Carneiro Inteligência Imobiliária" }],
   creator: "Carneiro Inteligência Imobiliária",
-  metadataBase: new URL("https://carneiroimoveis.com.br"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://carneiroimoveis.com.br"),
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+  },
   openGraph: {
-    title: "Carneiro Inteligência Imobiliária | Compra, Venda e Avaliação de Imóveis",
+    title: "Carneiro Inteligência Imobiliária | Compra, Venda e Avaliação de Imóveis DF",
     description:
-      "Especialista em compra, venda e avaliação de imóveis utilizando inteligência de mercado e estratégias avançadas de negociação.",
+      "Especialista em compra, venda e avaliação de imóveis utilizando inteligência de mercado e estratégias avançadas de negociação em Brasília e região.",
     url: "https://carneiroimoveis.com.br",
     siteName: "Carneiro Inteligência Imobiliária",
     images: [
@@ -67,8 +89,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Carneiro Inteligência Imobiliária",
-    description: "Transformando imóveis em oportunidades com inteligência de mercado.",
+    title: "Carneiro Inteligência Imobiliária | Brasília - DF",
+    description: "Transformando imóveis em oportunidades com inteligência de mercado e CRECI-DF 34325.",
     images: ["/images/logo.jpg"],
   },
   icons: {
