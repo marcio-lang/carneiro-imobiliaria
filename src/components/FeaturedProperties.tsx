@@ -85,15 +85,25 @@ export function FeaturedProperties() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent opacity-80" />
 
-                {/* Category tag */}
-                <div className="absolute top-4 left-4">
+                {/* Category and Status tags */}
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 pointer-events-none">
                   <span className="px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[#0D0D0D]/80 text-[#F3E5AB] border border-[#D4AF37]/40 backdrop-blur-md">
                     {prop.category}
                   </span>
+                  {prop.tag && (
+                    <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wider bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 backdrop-blur-md shadow-sm">
+                      {prop.tag}
+                    </span>
+                  )}
                 </div>
 
                 {/* Price tag over photo */}
-                <div className="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+                <div className="absolute bottom-3 left-4 right-4 flex flex-col items-start">
+                  {prop.pricePrefix && (
+                    <span className="text-[11px] text-[#F3E5AB] drop-shadow font-medium tracking-wide">
+                      {prop.pricePrefix}
+                    </span>
+                  )}
                   <span className="font-serif text-2xl font-bold text-white drop-shadow-md">
                     {formatPrice(prop.price)}
                   </span>

@@ -5,6 +5,8 @@ export interface Property {
   neighborhood: string;
   city: string;
   price: number;
+  pricePrefix?: string;
+  tag?: string;
   area: number; // m²
   bedrooms: number;
   suites: number;

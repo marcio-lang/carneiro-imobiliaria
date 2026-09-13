@@ -42,7 +42,9 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
       }).format(property.price)
     : "Sob Consulta";
 
-  const priceText = property.price && property.price > 0 ? `, no valor de ${formattedPrice}` : "";
+  const priceText = property.price && property.price > 0
+    ? ` ${property.pricePrefix ? property.pricePrefix.toLowerCase() : "no valor de"} ${formattedPrice}`
+    : "";
   const whatsappMessage = `Olá! Tenho interesse no imóvel "${property.title}" (${property.neighborhood} - ${property.city})${priceText}. Gostaria de receber mais informações e agendar uma visita!`;
 
   return (
@@ -100,11 +102,16 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
               </div>
             )}
 
-            {/* Category badge */}
-            <div className="absolute top-4 left-4">
+            {/* Category and tag badges */}
+            <div className="absolute top-4 left-4 right-16 flex items-center gap-2">
               <span className="px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#0D0D0D]/80 text-[#F3E5AB] border border-[#D4AF37]/40 backdrop-blur-md">
                 {property.category}
               </span>
+              {property.tag && (
+                <span className="px-3 py-1 rounded-full text-xs font-semibold tracking-wider bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 backdrop-blur-md shadow-sm">
+                  {property.tag}
+                </span>
+              )}
             </div>
 
             {/* Thumbnail selector */}
@@ -141,7 +148,9 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
               </div>
 
               <div className="text-left md:text-right">
-                <span className="text-xs text-gray-400 block uppercase tracking-wider">Valor de Investimento</span>
+                <span className="text-xs text-gray-400 block uppercase tracking-wider">
+                  {property.pricePrefix || "Valor de Investimento"}
+                </span>
                 <span className="font-serif text-2xl sm:text-3xl font-bold text-[#D4AF37]">
                   {formattedPrice}
                 </span>
