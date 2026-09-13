@@ -34,13 +34,16 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
     ? property.galleryUrls
     : [property.imageUrl];
 
-  const formattedPrice = new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-    maximumFractionDigits: 0,
-  }).format(property.price);
+  const formattedPrice = property.price && property.price > 0
+    ? new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        maximumFractionDigits: 0,
+      }).format(property.price)
+    : "Sob Consulta";
 
-  const whatsappMessage = `Olá! Tenho interesse no imóvel "${property.title}" (${property.neighborhood} - ${property.city}), no valor de ${formattedPrice}. Gostaria de receber mais informações e agendar uma visita!`;
+  const priceText = property.price && property.price > 0 ? `, no valor de ${formattedPrice}` : "";
+  const whatsappMessage = `Olá! Tenho interesse no imóvel "${property.title}" (${property.neighborhood} - ${property.city})${priceText}. Gostaria de receber mais informações e agendar uma visita!`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/85 backdrop-blur-md animate-fade-in">
@@ -153,7 +156,9 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Área Privativa</p>
-                  <p className="font-bold text-white">{property.area} m²</p>
+                  <p className="font-bold text-white">
+                    {typeof property.area === "number" ? property.area.toLocaleString("pt-BR") : property.area} m²
+                  </p>
                 </div>
               </div>
 
@@ -163,7 +168,10 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Dormitórios</p>
-                  <p className="font-bold text-white">{property.bedrooms} Quartos ({property.suites} Suítes)</p>
+                  <p className="font-bold text-white">
+                    {property.bedrooms} {property.bedrooms === 1 ? "Quarto" : "Quartos"}
+                    {property.suites > 0 ? ` (${property.suites} ${property.suites === 1 ? "Suíte" : "Suítes"})` : ""}
+                  </p>
                 </div>
               </div>
 
@@ -173,7 +181,9 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Banheiros</p>
-                  <p className="font-bold text-white">{property.bathrooms} Banheiros</p>
+                  <p className="font-bold text-white">
+                    {property.bathrooms} {property.bathrooms === 1 ? "Banheiro" : "Banheiros"}
+                  </p>
                 </div>
               </div>
 
@@ -183,7 +193,9 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Vagas Cobertas</p>
-                  <p className="font-bold text-white">{property.parkingSpaces} Vagas</p>
+                  <p className="font-bold text-white">
+                    {property.parkingSpaces} {property.parkingSpaces === 1 ? "Vaga" : "Vagas"}
+                  </p>
                 </div>
               </div>
             </div>

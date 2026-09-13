@@ -18,6 +18,7 @@ export function FeaturedProperties() {
     : featuredProperties.filter((p) => p.category === activeFilter);
 
   const formatPrice = (value: number) => {
+    if (!value || value === 0) return "Sob Consulta";
     return new Intl.NumberFormat("pt-BR", {
       style: "currency",
       currency: "BRL",
@@ -115,7 +116,9 @@ export function FeaturedProperties() {
                   <div className="grid grid-cols-4 gap-2 py-3 border-y border-white/5 text-center text-xs text-gray-300">
                     <div className="flex flex-col items-center">
                       <Maximize2 className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
-                      <span className="font-semibold text-white">{prop.area} m²</span>
+                      <span className="font-semibold text-white">
+                        {typeof prop.area === "number" ? prop.area.toLocaleString("pt-BR") : prop.area} m²
+                      </span>
                       <span className="text-[10px] text-gray-400">Área</span>
                     </div>
 
