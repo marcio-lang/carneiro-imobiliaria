@@ -11,7 +11,7 @@ export function FeaturedProperties() {
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("Todos");
 
-  const categories = ["Todos", "Alto Padrão", "Cobertura", "Residencial", "Investimento"];
+  const categories = ["Todos", ...Array.from(new Set(featuredProperties.map((p) => p.category)))];
 
   const filteredProperties = activeFilter === "Todos"
     ? featuredProperties
@@ -51,24 +51,34 @@ export function FeaturedProperties() {
         </div>
 
         {/* Filter Pills */}
-        <div className="flex items-center justify-center flex-wrap gap-2.5 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveFilter(cat)}
-              className={`px-5 py-2 rounded-full text-xs uppercase tracking-wider font-semibold transition-all duration-300 ${
-                activeFilter === cat
-                  ? "bg-gradient-to-r from-[#D4AF37] to-[#B89222] text-[#0D0D0D] shadow-[0_4px_15px_rgba(212,175,55,0.3)] scale-105"
-                  : "bg-[#161616] text-gray-300 hover:text-white border border-white/5 hover:border-[#D4AF37]/30"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        {categories.length > 2 && (
+          <div className="flex items-center justify-center flex-wrap gap-2.5 mb-12">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
+                className={`px-5 py-2 rounded-full text-xs uppercase tracking-wider font-semibold transition-all duration-300 ${
+                  activeFilter === cat
+                    ? "bg-gradient-to-r from-[#D4AF37] to-[#B89222] text-[#0D0D0D] shadow-[0_4px_15px_rgba(212,175,55,0.3)] scale-105"
+                    : "bg-[#161616] text-gray-300 hover:text-white border border-white/5 hover:border-[#D4AF37]/30"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Property Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          className={`grid grid-cols-1 ${
+            filteredProperties.length === 1
+              ? "max-w-md mx-auto"
+              : filteredProperties.length === 2
+              ? "md:grid-cols-2 max-w-4xl mx-auto"
+              : "md:grid-cols-2 lg:grid-cols-3"
+          } gap-8`}
+        >
           {filteredProperties.map((prop) => (
             <article
               key={prop.id}
