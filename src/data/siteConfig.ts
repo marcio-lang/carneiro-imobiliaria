@@ -10,7 +10,7 @@ export const siteConfig = {
   phoneRaw: "5561982641387",
   whatsapp: "(61) 98264-1387",
   whatsappRaw: "5561982641387",
-  email: "contato@carneirointeligencia.com.br",
+  email: "contato@carneirointeligenciaimobi.com.br",
   creci: "CRECI-DF 34325",
   creciNumber: "CRECI 34325",
   address: "Centro Urbano Q. 302 Centro Urbano - Samambaia, Brasília - DF, 72300-641",

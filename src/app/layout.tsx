@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Carneiro Inteligência Imobiliária" }],
   creator: "Carneiro Inteligência Imobiliária",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://carneiroimoveis.com.br"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://carneirointeligenciaimobi.com.br"),
   alternates: {
     canonical: "/",
   },
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     title: "Carneiro Inteligência Imobiliária | Compra, Venda e Avaliação de Imóveis DF",
     description:
       "Especialista em compra, venda e avaliação de imóveis utilizando inteligência de mercado e estratégias avançadas de negociação em Brasília e região.",
-    url: "https://carneiroimoveis.com.br",
+    url: "https://carneirointeligenciaimobi.com.br",
     siteName: "Carneiro Inteligência Imobiliária",
     images: [
       {
@@ -115,7 +115,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     name: siteConfig.name,
-    image: "https://carneiroimoveis.com.br/images/logo.jpg",
+    image: "https://carneirointeligenciaimobi.com.br/images/logo.jpg",
     telephone: siteConfig.phone,
     email: siteConfig.email,
     address: {
@@ -140,7 +140,7 @@ export default function RootLayout({
       bestRating: "5",
       worstRating: "1",
     },
-    url: "https://carneiroimoveis.com.br",
+    url: "https://carneirointeligenciaimobi.com.br",
   };
 
   return (
