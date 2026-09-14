@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { MapPin, Maximize2, Bed, Bath, Car, ArrowRight, Sparkles } from "lucide-react";
+import { MapPin, Maximize2, Bed, Bath, Car, ArrowRight, Sparkles, ShieldCheck, Wallet, Coins } from "lucide-react";
 import { featuredProperties } from "@/data/properties";
 import { Property } from "@/types";
 import { PropertyModal } from "./PropertyModal";
@@ -75,7 +75,7 @@ export function FeaturedProperties() {
             filteredProperties.length === 1
               ? "max-w-md mx-auto"
               : filteredProperties.length === 2
-              ? "md:grid-cols-2 max-w-4xl mx-auto"
+              ? "md:grid-cols-2 max-w-5xl mx-auto"
               : "md:grid-cols-2 lg:grid-cols-3"
           } gap-8`}
         >
@@ -133,33 +133,63 @@ export function FeaturedProperties() {
                   </h3>
 
                   {/* 4 Key Spec Badges */}
-                  <div className="grid grid-cols-4 gap-2 py-3 border-y border-white/5 text-center text-xs text-gray-300">
-                    <div className="flex flex-col items-center">
-                      <Maximize2 className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
-                      <span className="font-semibold text-white">
-                        {typeof prop.area === "number" ? prop.area.toLocaleString("pt-BR") : prop.area} m²
-                      </span>
-                      <span className="text-[10px] text-gray-400">Área</span>
-                    </div>
+                  {prop.category === "Loteamento" || (!prop.bedrooms && !prop.bathrooms) ? (
+                    <div className="grid grid-cols-4 gap-2 py-3 border-y border-white/5 text-center text-xs text-gray-300">
+                      <div className="flex flex-col items-center">
+                        <Maximize2 className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
+                        <span className="font-semibold text-white">
+                          {typeof prop.area === "number" ? prop.area.toLocaleString("pt-BR") : prop.area} m²
+                        </span>
+                        <span className="text-[10px] text-gray-400">A partir</span>
+                      </div>
 
-                    <div className="flex flex-col items-center">
-                      <Bed className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
-                      <span className="font-semibold text-white">{prop.bedrooms}</span>
-                      <span className="text-[10px] text-gray-400">Quartos</span>
-                    </div>
+                      <div className="flex flex-col items-center">
+                        <Wallet className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
+                        <span className="font-semibold text-white">{prop.downPayment || "5 Mil"}</span>
+                        <span className="text-[10px] text-gray-400">Entrada</span>
+                      </div>
 
-                    <div className="flex flex-col items-center">
-                      <Bath className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
-                      <span className="font-semibold text-white">{prop.bathrooms}</span>
-                      <span className="text-[10px] text-gray-400">Banh.</span>
-                    </div>
+                      <div className="flex flex-col items-center">
+                        <Coins className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
+                        <span className="font-semibold text-white">{prop.installmentPayment || "5 Mil"}</span>
+                        <span className="text-[10px] text-gray-400">Parcelas</span>
+                      </div>
 
-                    <div className="flex flex-col items-center">
-                      <Car className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
-                      <span className="font-semibold text-white">{prop.parkingSpaces}</span>
-                      <span className="text-[10px] text-gray-400">Vagas</span>
+                      <div className="flex flex-col items-center">
+                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 mb-1" />
+                        <span className="font-semibold text-white">100%</span>
+                        <span className="text-[10px] text-gray-400">Legal</span>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="grid grid-cols-4 gap-2 py-3 border-y border-white/5 text-center text-xs text-gray-300">
+                      <div className="flex flex-col items-center">
+                        <Maximize2 className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
+                        <span className="font-semibold text-white">
+                          {typeof prop.area === "number" ? prop.area.toLocaleString("pt-BR") : prop.area} m²
+                        </span>
+                        <span className="text-[10px] text-gray-400">Área</span>
+                      </div>
+
+                      <div className="flex flex-col items-center">
+                        <Bed className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
+                        <span className="font-semibold text-white">{prop.bedrooms}</span>
+                        <span className="text-[10px] text-gray-400">Quartos</span>
+                      </div>
+
+                      <div className="flex flex-col items-center">
+                        <Bath className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
+                        <span className="font-semibold text-white">{prop.bathrooms}</span>
+                        <span className="text-[10px] text-gray-400">Banh.</span>
+                      </div>
+
+                      <div className="flex flex-col items-center">
+                        <Car className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
+                        <span className="font-semibold text-white">{prop.parkingSpaces}</span>
+                        <span className="text-[10px] text-gray-400">Vagas</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Action CTA Button */}

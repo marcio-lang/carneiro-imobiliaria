@@ -48,7 +48,12 @@ export const metadata: Metadata = {
     "Carneiro Corretor de Imóveis DF",
     "Genilton Carneiro",
     "CRECI 34325",
-    "CRECI-DF 34325"
+    "CRECI-DF 34325",
+    "loteamento cidade inteligente",
+    "loteamento o parque do futuro",
+    "lotes santo antônio do descoberto",
+    "lotes entorno df",
+    "terrenos e lotes brasília"
   ],
   authors: [{ name: "Carneiro Inteligência Imobiliária" }],
   creator: "Carneiro Inteligência Imobiliária",

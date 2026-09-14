@@ -1,17 +1,20 @@
 export interface Property {
   id: string;
   title: string;
-  category: 'Residencial' | 'Alto Padrão' | 'Cobertura' | 'Investimento';
+  category: 'Residencial' | 'Alto Padrão' | 'Cobertura' | 'Investimento' | 'Loteamento';
   neighborhood: string;
   city: string;
   price: number;
   pricePrefix?: string;
   tag?: string;
   area: number; // m²
-  bedrooms: number;
-  suites: number;
-  bathrooms: number;
-  parkingSpaces: number;
+  bedrooms?: number;
+  suites?: number;
+  bathrooms?: number;
+  parkingSpaces?: number;
+  downPayment?: string;
+  installmentPayment?: string;
+  brochureUrl?: string;
   imageUrl: string;
   galleryUrls?: string[];
   features: string[];

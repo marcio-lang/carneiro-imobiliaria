@@ -2,7 +2,22 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { X, MapPin, Maximize2, Bed, Bath, Car, Check, MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  X,
+  MapPin,
+  Maximize2,
+  Bed,
+  Bath,
+  Car,
+  Check,
+  MessageCircle,
+  ChevronLeft,
+  ChevronRight,
+  ShieldCheck,
+  Wallet,
+  Coins,
+  FileText
+} from "lucide-react";
 import { Property } from "@/types";
 import { siteConfig } from "@/data/siteConfig";
 
@@ -45,7 +60,10 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
   const priceText = property.price && property.price > 0
     ? ` ${property.pricePrefix ? property.pricePrefix.toLowerCase() : "no valor de"} ${formattedPrice}`
     : "";
-  const whatsappMessage = `Olá! Tenho interesse no imóvel "${property.title}" (${property.neighborhood} - ${property.city})${priceText}. Gostaria de receber mais informações e agendar uma visita!`;
+
+  const whatsappMessage = property.category === "Loteamento"
+    ? `Olá! Tenho interesse no "${property.title}" (${property.neighborhood} - ${property.city})${priceText}. Gostaria de mais informações sobre os lotes a partir de 300m², entrada de R$ 5 mil e parcelas de R$ 5 mil!`
+    : `Olá! Tenho interesse no imóvel "${property.title}" (${property.neighborhood} - ${property.city})${priceText}. Gostaria de receber mais informações e agendar uma visita!`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/85 backdrop-blur-md animate-fade-in">
@@ -116,13 +134,13 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
 
             {/* Thumbnail selector */}
             {images.length > 1 && (
-              <div className="absolute bottom-4 left-4 flex space-x-2">
+              <div className="absolute bottom-4 left-4 right-4 flex space-x-2 overflow-x-auto pb-1 scrollbar-thin">
                 {images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setActiveImageIndex(idx)}
-                    className={`relative w-12 h-8 rounded-lg overflow-hidden border-2 transition-all ${
-                      activeImageIndex === idx ? "border-[#D4AF37] scale-105" : "border-transparent opacity-60"
+                    className={`relative flex-shrink-0 w-14 h-9 rounded-lg overflow-hidden border-2 transition-all ${
+                      activeImageIndex === idx ? "border-[#D4AF37] scale-105 shadow-md" : "border-transparent opacity-60 hover:opacity-100"
                     }`}
                   >
                     <Image src={img} alt="Miniatura" fill className="object-cover" />
@@ -158,63 +176,115 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
             </div>
 
             {/* Spec Icons Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-2xl bg-[#0D0D0D] border border-white/5">
-              <div className="flex items-center space-x-3 p-2">
-                <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
-                  <Maximize2 className="w-5 h-5" />
+            {property.category === "Loteamento" || (!property.bedrooms && !property.bathrooms) ? (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-2xl bg-[#0D0D0D] border border-white/5">
+                <div className="flex items-center space-x-3 p-2">
+                  <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
+                    <Maximize2 className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400">Tamanho dos Lotes</p>
+                    <p className="font-bold text-white">
+                      A partir de {typeof property.area === "number" ? property.area.toLocaleString("pt-BR") : property.area} m²
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs text-gray-400">Área Privativa</p>
-                  <p className="font-bold text-white">
-                    {typeof property.area === "number" ? property.area.toLocaleString("pt-BR") : property.area} m²
-                  </p>
-                </div>
-              </div>
 
-              <div className="flex items-center space-x-3 p-2">
-                <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
-                  <Bed className="w-5 h-5" />
+                <div className="flex items-center space-x-3 p-2">
+                  <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
+                    <Wallet className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400">Entrada Facilitada</p>
+                    <p className="font-bold text-white">
+                      {property.downPayment || "R$ 5.000"}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs text-gray-400">Dormitórios</p>
-                  <p className="font-bold text-white">
-                    {property.bedrooms} {property.bedrooms === 1 ? "Quarto" : "Quartos"}
-                    {property.suites > 0 ? ` (${property.suites} ${property.suites === 1 ? "Suíte" : "Suítes"})` : ""}
-                  </p>
-                </div>
-              </div>
 
-              <div className="flex items-center space-x-3 p-2">
-                <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
-                  <Bath className="w-5 h-5" />
+                <div className="flex items-center space-x-3 p-2">
+                  <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
+                    <Coins className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400">Parcelamento</p>
+                    <p className="font-bold text-white">
+                      {property.installmentPayment ? `${property.installmentPayment} / mês` : "R$ 5.000 / mês"}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs text-gray-400">Banheiros</p>
-                  <p className="font-bold text-white">
-                    {property.bathrooms} {property.bathrooms === 1 ? "Banheiro" : "Banheiros"}
-                  </p>
-                </div>
-              </div>
 
-              <div className="flex items-center space-x-3 p-2">
-                <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
-                  <Car className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400">Vagas Cobertas</p>
-                  <p className="font-bold text-white">
-                    {property.parkingSpaces} {property.parkingSpaces === 1 ? "Vaga" : "Vagas"}
-                  </p>
+                <div className="flex items-center space-x-3 p-2">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                    <ShieldCheck className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400">Documentação</p>
+                    <p className="font-bold text-emerald-300">
+                      100% Legalizado
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-2xl bg-[#0D0D0D] border border-white/5">
+                <div className="flex items-center space-x-3 p-2">
+                  <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
+                    <Maximize2 className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400">Área Privativa</p>
+                    <p className="font-bold text-white">
+                      {typeof property.area === "number" ? property.area.toLocaleString("pt-BR") : property.area} m²
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-3 p-2">
+                  <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
+                    <Bed className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400">Dormitórios</p>
+                    <p className="font-bold text-white">
+                      {property.bedrooms} {property.bedrooms === 1 ? "Quarto" : "Quartos"}
+                      {property.suites && property.suites > 0 ? ` (${property.suites} ${property.suites === 1 ? "Suíte" : "Suítes"})` : ""}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-3 p-2">
+                  <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
+                    <Bath className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400">Banheiros</p>
+                    <p className="font-bold text-white">
+                      {property.bathrooms} {property.bathrooms === 1 ? "Banheiro" : "Banheiros"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-3 p-2">
+                  <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37]">
+                    <Car className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400">Vagas Cobertas</p>
+                    <p className="font-bold text-white">
+                      {property.parkingSpaces} {property.parkingSpaces === 1 ? "Vaga" : "Vagas"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Description */}
             <div>
               <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-2">
                 Sobre a Propriedade
               </h4>
-              <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+              <p className="text-gray-300 text-sm sm:text-base leading-relaxed whitespace-pre-line">
                 {property.description}
               </p>
             </div>
@@ -240,18 +310,32 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
             <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-xs text-gray-400 flex items-center">
                 <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse" />
-                Imóvel disponível para visitação exclusiva com hora marcada
+                Atendimento consultivo e plantão de vendas com CRECI-DF 34325
               </div>
 
-              <a
-                href={siteConfig.getWhatsAppLink(whatsappMessage)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="gold-btn-primary w-full sm:w-auto px-8 py-3.5 rounded-full text-xs uppercase tracking-wider font-bold flex items-center justify-center space-x-2"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>Agendar Visita via WhatsApp</span>
-              </a>
+              <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                {property.brochureUrl && (
+                  <a
+                    href={property.brochureUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto px-6 py-3.5 rounded-full text-xs uppercase tracking-wider font-bold flex items-center justify-center space-x-2 bg-[#1C1C1C] hover:bg-[#252525] text-[#F3E5AB] border border-[#D4AF37]/40 hover:border-[#D4AF37] transition-all duration-300 shadow-sm"
+                  >
+                    <FileText className="w-4 h-4 text-[#D4AF37]" />
+                    <span>Baixar Book (PDF)</span>
+                  </a>
+                )}
+
+                <a
+                  href={siteConfig.getWhatsAppLink(whatsappMessage)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gold-btn-primary w-full sm:w-auto px-7 py-3.5 rounded-full text-xs uppercase tracking-wider font-bold flex items-center justify-center space-x-2"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Falar no WhatsApp</span>
+                </a>
+              </div>
             </div>
 
           </div>
