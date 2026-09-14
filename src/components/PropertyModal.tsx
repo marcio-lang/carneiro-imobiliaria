@@ -62,7 +62,7 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
     : "";
 
   const whatsappMessage = property.category === "Loteamento"
-    ? `Olá! Tenho interesse no "${property.title}" (${property.neighborhood} - ${property.city})${priceText}. Gostaria de mais informações sobre os lotes a partir de 300m², entrada de R$ 5 mil e parcelas de R$ 5 mil!`
+    ? `Olá! Tenho interesse no "${property.title}" (${property.neighborhood} - ${property.city})${priceText}. Gostaria de mais informações sobre os lotes a partir de 300m², entrada de R$ 5 mil e parcelas a partir de R$ 500!`
     : `Olá! Tenho interesse no imóvel "${property.title}" (${property.neighborhood} - ${property.city})${priceText}. Gostaria de receber mais informações e agendar uma visita!`;
 
   return (
@@ -134,16 +134,18 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
 
             {/* Thumbnail selector */}
             {images.length > 1 && (
-              <div className="absolute bottom-4 left-4 right-4 flex space-x-2 overflow-x-auto pb-1 scrollbar-thin">
+              <div className="absolute bottom-3 left-3 right-3 flex space-x-2 overflow-x-auto py-1 px-1.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                 {images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setActiveImageIndex(idx)}
-                    className={`relative flex-shrink-0 w-14 h-9 rounded-lg overflow-hidden border-2 transition-all ${
-                      activeImageIndex === idx ? "border-[#D4AF37] scale-105 shadow-md" : "border-transparent opacity-60 hover:opacity-100"
+                    className={`relative flex-shrink-0 w-14 h-9 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                      activeImageIndex === idx
+                        ? "border-[#D4AF37] scale-105 shadow-[0_0_10px_rgba(212,175,55,0.5)] opacity-100"
+                        : "border-transparent opacity-60 hover:opacity-100"
                     }`}
                   >
-                    <Image src={img} alt="Miniatura" fill className="object-cover" />
+                    <Image src={img} alt={`Foto ${idx + 1}`} fill className="object-cover" sizes="60px" />
                   </button>
                 ))}
               </div>
@@ -209,7 +211,7 @@ export function PropertyModal({ property, onClose }: PropertyModalProps) {
                   <div>
                     <p className="text-xs text-gray-400">Parcelamento</p>
                     <p className="font-bold text-white">
-                      {property.installmentPayment ? `${property.installmentPayment} / mês` : "R$ 5.000 / mês"}
+                      {property.installmentPayment ? `${property.installmentPayment} / mês` : "R$ 500 / mês"}
                     </p>
                   </div>
                 </div>

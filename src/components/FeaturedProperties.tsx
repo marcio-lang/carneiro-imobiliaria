@@ -151,7 +151,7 @@ export function FeaturedProperties() {
 
                       <div className="flex flex-col items-center">
                         <Coins className="w-3.5 h-3.5 text-[#D4AF37] mb-1" />
-                        <span className="font-semibold text-white">{prop.installmentPayment || "5 Mil"}</span>
+                        <span className="font-semibold text-white">{prop.installmentPayment || "R$ 500"}</span>
                         <span className="text-[10px] text-gray-400">Parcelas</span>
                       </div>
 

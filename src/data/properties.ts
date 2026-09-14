@@ -39,14 +39,14 @@ export const featuredProperties: Property[] = [
     city: "Entorno DF / Santo Antônio do Descoberto",
     price: 150000,
     pricePrefix: "Lotes a partir de",
-    tag: "Entrada R$ 5 mil • Parcelas R$ 5 mil",
+    tag: "Entrada R$ 5 mil • Parcelas R$ 500",
     area: 300,
     bedrooms: 0,
     suites: 0,
     bathrooms: 0,
     parkingSpaces: 0,
     downPayment: "R$ 5.000",
-    installmentPayment: "R$ 5.000",
+    installmentPayment: "R$ 500",
     brochureUrl: "/docs/revista-cidade-inteligente.pdf",
     imageUrl: "/images/properties/cidade-inteligente/cidade-inteligente-capa.jpg",
     galleryUrls: [
@@ -67,7 +67,7 @@ export const featuredProperties: Property[] = [
     ],
     features: [
       "Lotes residenciais e comerciais a partir de 300 m² (os maiores da região)",
-      "Condições facilitadas: Entrada de apenas R$ 5.000 e parcelas a partir de R$ 5.000",
+      "Condições facilitadas: Entrada de apenas R$ 5.000 e parcelas a partir de R$ 500",
       "O Parque do Futuro: Parque linear exclusivo com 1,7 km de extensão e 40m de largura",
       "Lago privativo com Praia Artificial de 30.000 m²",
       "Batalhão da Polícia Militar integrado com monitoramento por câmeras 24 horas",
@@ -81,7 +81,7 @@ export const featuredProperties: Property[] = [
       "Sucesso comprovado: 1ª Etapa e Etapa do Lago 100% Vendidas",
       "Localização estratégica: a apenas 22 km de Samambaia e a 20 minutos de Brasília"
     ],
-    description: "O Loteamento Cidade Inteligente - O Parque do Futuro é o primeiro bairro planejado sob o conceito Smart City na região metropolitana do DF, realizado pela consagrada incorporadora FBZ (+19 anos e desenvolvedores do Singapura Shopping). Com lotes amplos a partir de 300 m², o projeto integra sustentabilidade, infraestrutura de primeiro mundo e lazer completo com lago e praia artificial de 30.000 m².\n\nO grande diferencial é 'O Parque do Futuro', um parque linear com 1,7 km de extensão que abriga ciclovia, quadras de tênis e esportes, praça TEA adaptada, espaço pet, e órgãos públicos consolidados como Secretarias de Saúde e Educação, Poupatempo Na Hora, Auditório e Batalhão da Polícia Militar com monitoramento 24h por câmeras.\n\nCom a 1ª Etapa e a Etapa do Lago 100% vendidas, galerias pluviais concluídas, iluminação LED funcionando e documentação 100% regularizada (Alvará nº 001/2020), esta é a maior oportunidade de valorização e segurança para sua família ou investimento. Lotes a partir de R$ 150.000, com entrada facilitada de R$ 5.000 e parcelas de R$ 5.000.",
+    description: "O Loteamento Cidade Inteligente - O Parque do Futuro é o primeiro bairro planejado sob o conceito Smart City na região metropolitana do DF, realizado pela consagrada incorporadora FBZ (+19 anos e desenvolvedores do Singapura Shopping). Com lotes amplos a partir de 300 m², o projeto integra sustentabilidade, infraestrutura de primeiro mundo e lazer completo com lago e praia artificial de 30.000 m².\n\nO grande diferencial é 'O Parque do Futuro', um parque linear com 1,7 km de extensão que abriga ciclovia, quadras de tênis e esportes, praça TEA adaptada, espaço pet, e órgãos públicos consolidados como Secretarias de Saúde e Educação, Poupatempo Na Hora, Auditório e Batalhão da Polícia Militar com monitoramento 24h por câmeras.\n\nCom a 1ª Etapa e a Etapa do Lago 100% vendidas, galerias pluviais concluídas, iluminação LED funcionando e documentação 100% regularizada (Alvará nº 001/2020), esta é a maior oportunidade de valorização e segurança para sua família ou investimento. Lotes a partir de R$ 150.000, com entrada facilitada de R$ 5.000 e parcelas a partir de R$ 500.",
     isFeatured: true,
   },
   {
